@@ -31,7 +31,7 @@ export function MyPlants() {
                 style: 'cancel'
             },
             {
-                text: 'Sim 🥲',
+                text: 'Sim 🥺',
                 onPress: async () => {
                     try {
                         await removePlant(plant.id);
@@ -39,7 +39,7 @@ export function MyPlants() {
                             oldData.filter((item) => item.id !== plant.id)
                         );                        
                     } catch (error) {
-                        Alert.alert('Não foi possível remover! 🥲');
+                        Alert.alert('Não foi possível remover! 🥺');
                     }
                 }
             }
