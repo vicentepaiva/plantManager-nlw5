@@ -37,7 +37,10 @@ export function MyPlants() {
                         await removePlant(plant.id);
                         setMyPlants((oldData) => 
                             oldData.filter((item) => item.id !== plant.id)
-                        );                        
+                        );    
+                        if(myPlants.length===1){
+                            setNextWatered('Você ainda nao selecionou nenhuma planta!') 
+                        }                    
                     } catch (error) {
                         Alert.alert('Não foi possível remover! 🥺');
                     }
@@ -46,11 +49,11 @@ export function MyPlants() {
         ])
         
     }
-
+  
     useEffect(() => {
         async function loadStorageData() {
             const plantsStoraged = await loadPlant();
-
+            if(plantsStoraged.length >0){
             const nextTime = formatDistance(
                 new Date(plantsStoraged[0].dateTimeNotification).getTime(),
                 new Date().getTime(),
@@ -60,6 +63,9 @@ export function MyPlants() {
             setNextWatered(
                 `Não esqueça de regar a ${plantsStoraged[0].name} à ${nextTime} horas.`
             ) 
+        }else{
+            setNextWatered('Você ainda nao selecionou nenhuma planta!')
+        }
             
             setMyPlants(plantsStoraged);
             setLoading(false);
